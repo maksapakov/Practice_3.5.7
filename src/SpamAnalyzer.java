@@ -1,5 +1,5 @@
 public class SpamAnalyzer extends KeywordAnalyzer {
-    private final String[] keywords;
+    public String[] keywords;
 
     public SpamAnalyzer(String[] spamKeywords) {
         this.keywords = spamKeywords.clone();

@@ -45,7 +45,6 @@ public class Main {
         tests[7] = "Very bad, very neg =(, very ..................";      // SPAM or NEGATIVE_TEXT or TOO_LONG
         TextAnalyzer[][] textAnalyzers = {textAnalyzers1, textAnalyzers2, textAnalyzers3,
                 textAnalyzers4, textAnalyzers5, textAnalyzers6};
-        //noinspection InstantiationOfUtilityClass
         Main testObject = new Main();
         int numberOfAnalyzer; // номер анализатора, указанный в идентификаторе textAnalyzers{№}
         int numberOfTest = 0; // номер теста, который соответствует индексу тестовых комментариев
@@ -55,7 +54,6 @@ public class Main {
             System.out.println(test);
             for (TextAnalyzer[] analyzers : textAnalyzers) {
                 System.out.print(numberOfAnalyzer + ": ");
-                //noinspection AccessStaticViaInstance
                 System.out.println(testObject.checkLabels(analyzers, test));
                 numberOfAnalyzer++;
             }
@@ -76,10 +74,10 @@ public class Main {
 
 public Label checkLabels (TextAnalyzer[] textAnalyzer, String text) {
     TextAnalyzer[] textAnalyzers = textAnalyzer.clone();
-    for (TextAnalyzer textAnalyzer1 :
+    for (TextAnalyzer analyzer :
             textAnalyzers) {
-        if (textAnalyzer1.processText(text) != Label.OK) {
-            return textAnalyzer1.processText(text);
+        if (analyzer.processText(text) != Label.OK) {
+            return analyzer.processText(text);
         }
     }
     return Label.OK;

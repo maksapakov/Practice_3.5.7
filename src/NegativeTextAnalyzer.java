@@ -1,11 +1,11 @@
 public class NegativeTextAnalyzer extends KeywordAnalyzer {
-    private final String[] keywords = {":(", "=(", ":|"};
+    public String[] keywords = {":(", "=(", ":|"};
 
-    protected String[] getKeyword() {
+    public String[] getKeyword() {
         return keywords;
     }
 
-    protected Label getLabel() {
+    public Label getLabel() {
         return Label.NEGATIVE_TEXT;
     }
 }

@@ -1,11 +1,11 @@
 public class TooLongTextAnalyzer implements TextAnalyzer {
-    private final int maxLength;
+    public int maxLength;
 
     public TooLongTextAnalyzer(int commentMaxLength) {
         this.maxLength = commentMaxLength;
     }
 
-    private Label getLabel() {
+    public Label getLabel() {
         return Label.TOO_LONG;
     }
 
@@ -13,8 +13,7 @@ public class TooLongTextAnalyzer implements TextAnalyzer {
     public Label processText(String text) {
         if (text.length() >= maxLength) {
             return getLabel();
-        } else {
-            return Label.OK;
         }
+        return Label.OK;
     }
 }

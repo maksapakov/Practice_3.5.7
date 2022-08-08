@@ -7,11 +7,7 @@ public abstract class KeywordAnalyzer implements TextAnalyzer {
     public Label processText(String text) {
         for (String keyword :
                 getKeyword()) {
-            if (text.regionMatches(true,
-                    text.toLowerCase().indexOf(keyword),
-                    keyword.toLowerCase(),
-                    0,
-                    keyword.length())) {
+            if (text.contains(keyword)) {
                 return getLabel();
             }
         }
