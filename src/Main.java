@@ -66,15 +66,15 @@ public class Main {
         NegativeTextAnalyzer negativeTA = new NegativeTextAnalyzer();
         TooLongTextAnalyzer tooLongTA = new TooLongTextAnalyzer(40);
         TextAnalyzer[] analyzers = {spamA, negativeTA, tooLongTA};
-        System.out.println(checkLabels(analyzers, "Хороший текст для теста."));
-        System.out.println(checkLabels(analyzers, "Плохой текст для теста, так как это :( ужас."));
-        System.out.println(checkLabels(analyzers, "Плохой текст для теста, полный отстой."));
-        System.out.println(checkLabels(analyzers, "И это все, что вы хотели написать в комментариях. Да ну, вообще..."));
+        System.out.println(testObject.checkLabels(analyzers, "Хороший текст для теста."));
+        System.out.println(testObject.checkLabels(analyzers, "Плохой текст для теста, так как это :( ужас."));
+        System.out.println(testObject.checkLabels(analyzers, "Плохой текст для теста, полный отстой."));
+        System.out.println(testObject.checkLabels(analyzers, "И это все, что вы хотели написать в комментариях. Да ну, вообще..."));
 
 
     }
 
-public static Label checkLabels(TextAnalyzer[] textAnalyzer, String text) {
+public Label checkLabels (TextAnalyzer[] textAnalyzer, String text) {
     TextAnalyzer[] textAnalyzers = textAnalyzer.clone();
     for (TextAnalyzer textAnalyzer1 :
             textAnalyzers) {
@@ -85,56 +85,8 @@ public static Label checkLabels(TextAnalyzer[] textAnalyzer, String text) {
     return Label.OK;
 }
 
-public static class SpamAnalyzer extends KeywordAnalyzer {
-    private final String[] keywords;
-
-    public SpamAnalyzer(String[] spamKeywords) {
-        this.keywords = spamKeywords.clone();
-    }
 
 
-    public String[] getKeyword() {
-        return keywords;
-    }
-
-    public Label getLabel() {
-        return Label.SPAM;
-    }
-
-}
-
-public static class NegativeTextAnalyzer extends KeywordAnalyzer {
-    private final String[] keywords = {":(", "=(", ":|"};
-
-    protected String[] getKeyword() {
-        return keywords;
-    }
-
-    protected Label getLabel() {
-        return Label.NEGATIVE_TEXT;
-    }
-}
-
-public static class TooLongTextAnalyzer implements TextAnalyzer {
-    private final int maxLength;
-
-    public TooLongTextAnalyzer(int commentMaxLength) {
-        this.maxLength = commentMaxLength;
-    }
-
-    private Label getLabel() {
-        return Label.TOO_LONG;
-    }
-
-    @Override
-    public Label processText(String text) {
-        if (text.length() >= maxLength) {
-            return getLabel();
-        } else {
-            return Label.OK;
-        }
-    }
-}
 
 
 }
